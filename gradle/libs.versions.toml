@@ -13,7 +13,7 @@ constraintlayout = "2.1.4"
 recyclerview = "1.3.2"
 lifecycle-livedata = "2.6.2"
 lifecycle-viewmodel = "2.6.2"  # 新增：替代lifecycle-extensions
-swiperefreshlayout = "1.2.0"
+swiperefreshlayout = "1.1.0"
 # Retrofit
 retrofit = "2.9.0"
 # 协程

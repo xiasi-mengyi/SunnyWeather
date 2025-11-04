@@ -3,7 +3,13 @@
     <style name="Base.Theme.SunnyWeather" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- 1. 设置状态栏背景色（替换为#2DC5B7，与FrameLayout背景色一致,避免白底） -->
+        <item name="android:statusBarColor">#2DC5B7</item> <!-- 深色主题色 -->
+        <!-- 2. 设置状态栏文字/图标颜色 -->
+        <!-- false = 状态栏文字白色（适合深色背景）；true = 黑色（适合浅色背景） -->
+        <item name="android:windowLightStatusBar">true</item>
     </style>
+
 
     <style name="Theme.SunnyWeather" parent="Base.Theme.SunnyWeather" />
 </resources>

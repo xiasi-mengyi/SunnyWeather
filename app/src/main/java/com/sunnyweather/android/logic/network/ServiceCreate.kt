@@ -18,6 +18,6 @@ object ServiceCreate {
 
     // 提供两种创建动态代理的方法,一种常规,一种泛型实化
     fun <T> create(serviceClass: Class<T>): T= retrofit.create(serviceClass)
-    // 第二种方法调用第一种方法
+    // 第二种方法利用泛型实化，并调用第一种方法
     inline fun <reified T> create(): T = create(T::class.java)
 }

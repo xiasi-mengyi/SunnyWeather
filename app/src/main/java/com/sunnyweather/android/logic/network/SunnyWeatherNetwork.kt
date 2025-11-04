@@ -18,7 +18,7 @@ object SunnyWeatherNetwork {
     // 提供挂起函数返回请求结果
     suspend fun searchPlaces(query: String) = placeService.searchPlace(query).await()
 
-    // 封装请求过程
+    // 封装请求和回调过程
     private suspend fun <T> Call<T>.await(): T {
         // 创建并挂起协程,在上层开启的线程中执行
         return suspendCoroutine { Continuation ->
