@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--使用ScrollView滚动查看内容-->
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/weatherLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    android:overScrollMode="never"
+    android:visibility="invisible">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <!--通过引入布局简化该布局-->
+        <include
+            android:id="@+id/nowLayout"
+            layout="@layout/now" />
+        <include
+            android:id="@+id/forecastLayout"
+            layout="@layout/forecast" />
+        <include
+            android:id="@+id/lifeIndexLayout"
+            layout="@layout/life_index" />
+    </LinearLayout>
+</ScrollView>

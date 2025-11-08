@@ -3,7 +3,6 @@ package com.sunnyweather.android.logic.network
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import kotlin.coroutines.Continuation
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
@@ -13,10 +12,13 @@ import kotlin.coroutines.suspendCoroutine
 object SunnyWeatherNetwork {
 
     // 创建动态代理对象
-    private val placeService = ServiceCreate.create<PlaceService>()
+    private val placeService = ServiceCreator.create<PlaceService>()
+    private val weatherService = ServiceCreator.create<WeatherService>()
 
-    // 提供挂起函数返回请求结果
+    // 提供挂起函数,并返回请求结果
     suspend fun searchPlaces(query: String) = placeService.searchPlace(query).await()
+    suspend fun getDailyWeather(lng: String, lat: String) = weatherService.getDailyWeather(lng, lat).await()
+    suspend fun getRealtimeWeather(lng: String, lat: String) = weatherService.getRealtimeWeather(lng, lat).await()
 
     // 封装请求和回调过程
     private suspend fun <T> Call<T>.await(): T {
