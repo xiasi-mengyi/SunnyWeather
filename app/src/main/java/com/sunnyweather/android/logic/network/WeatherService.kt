@@ -13,7 +13,8 @@ interface WeatherService {
 
     // 请求实时天气v2.6/J4ibV1NV5zIz2lRK/101.6656,39.2072/realtime
     @GET("v2.6/${SunnyWeatherApplication.TOKEN}/{lng},{lat}/realtime.json")
-    fun getRealtimeWeather(@Path("lng") lng: String, @Path("lat") lat: String):
+    fun getRealtimeWeather(@Path("lng") lng: String,
+                           @Path("lat") lat: String):
             Call<RealtimeResponse>
 
     // 请求未来几天天气v2.6/J4ibV1NV5zIz2lRK/101.6656,39.2072/daily?dailysteps=3

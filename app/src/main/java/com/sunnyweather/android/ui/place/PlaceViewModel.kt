@@ -39,8 +39,11 @@ class PlaceViewModel: ViewModel() {
         searchLiveData.value = query
     }
 
+    // 保存地址
     fun savePlace(place: Place) = Respository.savePlace(place)
+    // 对存储的地址进行读取
     fun getSavedPlace() = Respository.getSavedPlace()
+    // 对地址存储的状态进行判断
     fun isPlaceSaved() = Respository.isPlaceSaved()
 
 }

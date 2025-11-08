@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.sunnyweather.android.MainActivity
 import com.sunnyweather.android.databinding.FragmentPlaceBinding
 import com.sunnyweather.android.ui.weather.WeatherActivity
 
@@ -39,7 +40,8 @@ class PlaceFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // 对地址存储的状态进行判断和读取
-        if (viewModel.isPlaceSaved()) {
+        // 当PlaceFragment被嵌入MainActivity中(不在天气界面)，并且之前已经存在选中的城市,执行if
+        if (activity is MainActivity && viewModel.isPlaceSaved()) {
             val place = viewModel.getSavedPlace()
             val intent = Intent(context, WeatherActivity::class.java).apply {
                 putExtra("location_lng", place.location.lng)
@@ -75,7 +77,7 @@ class PlaceFragment: Fragment() {
 
         // 对PlaceViewModel中的placeLiveData对象进行观察，
         // 当有任何数据变化时，就会回调到传入的Observer接口实现中。
-        viewModel.placeLiveData.observe(viewLifecycleOwner, Observer { result ->
+        viewModel.placeLiveData.observe(viewLifecycleOwner) { result ->
             val places = result.getOrNull()
             // 会对回调的数据进行判断
             if (places != null) {
@@ -92,7 +94,7 @@ class PlaceFragment: Fragment() {
                 Toast.makeText(activity, "未能查询到任何地点", Toast.LENGTH_SHORT).show()
                 result.exceptionOrNull()?.printStackTrace()
             }
-        })
+        }
 
     }
 

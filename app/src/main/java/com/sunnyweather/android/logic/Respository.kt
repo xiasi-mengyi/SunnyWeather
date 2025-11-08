@@ -1,5 +1,6 @@
 package com.sunnyweather.android.logic
 
+import android.util.Log
 import androidx.lifecycle.liveData
 import com.sunnyweather.android.logic.dao.PlaceDao
 import com.sunnyweather.android.logic.model.Place
@@ -10,6 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlin.coroutines.CoroutineContext
+import kotlinx.coroutines.delay
 
 // 仓库层代码
 object Respository {
@@ -36,12 +38,18 @@ object Respository {
             val deferredRealtime = async {
                 SunnyWeatherNetwork.getRealtimeWeather(lng, lat)
             }
+            val realtimeResponse = deferredRealtime.await()
+            Log.d("仓库层", "realtimeResponse.status is ${realtimeResponse.status}")
+            // 受限与API的QPS=1,延迟1秒（挂起协程，不阻塞线程）
+            delay(1000)
             val deferredDaily = async {
                 SunnyWeatherNetwork.getDailyWeather(lng, lat)
             }
             // 调用await()等待请求响应
-            val realtimeResponse = deferredRealtime.await()
+
             val dailyResponse = deferredDaily.await()
+
+            Log.d("仓库层", "dailyResponse.status is ${dailyResponse.status}")
             // 判断请求结果
             if (realtimeResponse.status == "ok" && dailyResponse.status == "ok") {
                 val weather = Weather(
@@ -74,8 +82,8 @@ object Respository {
 
     // 保存地址
     fun savePlace(place: Place) = PlaceDao.savePlace(place)
-
+    // 对存储的地址进行读取
     fun getSavedPlace() = PlaceDao.getSavedPlace()
-
+    // 对地址存储的状态进行判断
     fun isPlaceSaved() = PlaceDao.isPlaceSaved()
 }
