@@ -34,6 +34,7 @@ class PlaceAdapter(
             val place = placeList[position]
             val activity = fragment.activity // 获取当前Fragment所处的Activity
             if (activity is WeatherActivity) {
+                // 点击后,关闭侧滑菜单,刷新内容
                 activity.binding.drawerLayout.closeDrawers()
                 activity.viewModel.locationLng = place.location.lng
                 activity.viewModel.locationLat = place.location.lat
