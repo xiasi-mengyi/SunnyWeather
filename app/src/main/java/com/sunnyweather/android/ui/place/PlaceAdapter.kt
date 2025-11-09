@@ -34,7 +34,7 @@ class PlaceAdapter(
             val place = placeList[position]
             val activity = fragment.activity // 获取当前Fragment所处的Activity
             if (activity is WeatherActivity) {
-                WeatherActivity().closeDrawer()
+                activity.binding.drawerLayout.closeDrawers()
                 activity.viewModel.locationLng = place.location.lng
                 activity.viewModel.locationLat = place.location.lat
                 activity.viewModel.placeName = place.name

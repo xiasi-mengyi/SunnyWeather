@@ -76,7 +76,7 @@ class WeatherActivity : AppCompatActivity() {
             // 请求结束后隐藏刷新进度条
             binding.swipeRefresh.isRefreshing = false
         }
-        binding.swipeRefresh.setColorSchemeResources(R.color.white)
+        binding.swipeRefresh.setColorSchemeResources(R.color.colorPrimary)
         refreshWeather()
         binding.swipeRefresh.setOnRefreshListener {
             refreshWeather()
@@ -87,11 +87,6 @@ class WeatherActivity : AppCompatActivity() {
     fun refreshWeather() {
         viewModel.refreshWeather(viewModel.locationLng, viewModel.locationLat)
         binding.swipeRefresh.isRefreshing = true
-    }
-
-    // 公开方法：关闭侧滑菜单
-    fun closeDrawer() {
-        binding.drawerLayout.closeDrawers()
     }
 
     private fun showWeatherInfo(weather: Weather) {
