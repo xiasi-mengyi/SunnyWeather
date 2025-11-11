@@ -104,13 +104,13 @@ class WeatherActivity : AppCompatActivity() {
         nowBinding.currentAQI.text = currentPM25Text
         nowBinding.nowLayout.setBackgroundResource(getSky(realtime.skycon).bg)
         // 填充forecast.xml布局中的数据
-        forecastBinding.forecastLayout.removeAllViews()
+        forecastBinding.forecastItemsLayout.removeAllViews()
         val days = daily.skycon.size
         for (i in 0 until days) {
             val skycon = daily.skycon[i]
             val temperature = daily.temperature[i]
             val view = LayoutInflater.from(this).inflate(R.layout.forecast_item,
-                forecastBinding.forecastLayout, false)
+                forecastBinding.forecastItemsLayout, false)
             // 填充forecast_item.xml布局中的数据
             val dateInfo = view.findViewById(R.id.dateInfo) as TextView
             val skyIcon = view.findViewById(R.id.skyIcon) as ImageView
@@ -123,7 +123,7 @@ class WeatherActivity : AppCompatActivity() {
             skyInfo.text = sky.info
             val tempText = "${temperature.min.toInt()} ~ ${temperature.max.toInt()} ℃"
             temperatureInfo.text = tempText
-            forecastBinding.forecastLayout.addView(view)
+            forecastBinding.forecastItemsLayout.addView(view)
         }
         // 填充life_index.xml布局中的数据
         val lifeIndex = daily.lifeIndex
